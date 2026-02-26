@@ -1,16 +1,25 @@
 import caller from "@/lib/api-caller";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST() {
-    try {
-        const data = await caller("/auth/token");
-        return await data.json();
+export async function POST(req: NextRequest) {
+  console.log("O que chegou no POST", req);
+  try {
+    const body = await req.json();
+    const response = await caller("/auth/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body)
+    });
 
-    } catch (e: any) {
-        return new Response(JSON.stringify({ error: e.message }), {
-            status: 500,
-            headers: {
-                "Content-Type": "application/json"
-            },
-        });
-    }
+    return NextResponse.json(response);
+
+  }
+  catch (err: any) {
+    const detalhe = err instanceof Error && err.cause ? (err.cause as any).detalhe : null;
+    const statusCode = err instanceof Error && err.cause ? (err.cause as any).status ?? 500 : 500;
+
+    return NextResponse.json(detalhe , { status: statusCode });
+  }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-export default function Loading() {
+export default function Hello() {
   return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <div className="w-full max-w-3xl bg-gray-900rounded-lg p-4 overflow-x-auto">

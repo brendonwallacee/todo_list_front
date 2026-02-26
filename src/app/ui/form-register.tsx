@@ -3,8 +3,6 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast, Toaster } from "react-hot-toast";
-import { HelloData } from "@/lib/types";
 
 const registerSchema = z.object({
   username: z.string().min(3, "Usuário deve ter pelo menos 3 caracteres"),

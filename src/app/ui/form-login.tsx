@@ -1,58 +1,75 @@
 "use client";
 
-import React from "react";
-import { toast, Toaster } from "react-hot-toast";
-import { HelloData } from "@/lib/types";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export default function FormLogin(res: HelloData) {
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void>{
-        e.preventDefault();
+const loginSchema = z.object({
+  email: z.email("E-mail inválido"),
+  password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
+  });
 
-        const formData = new FormData(e.currentTarget);
+type LoginFormData = z.infer<typeof loginSchema>;
 
-        const username = formData.get("username")
-        const password = formData.get("password")
+type FormLoginProps = {
+  action: (data: LoginFormData) => void;
+};
 
-        const data = res.message
+export default function FormLogin({ action: onSubmitForm }: FormLoginProps) {
 
-        console.log(data);
-        toast.success(`${data}`);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    mode: "onChange",
+  });
 
-        
-    }
+  function onSubmit(data: LoginFormData) {
+    onSubmitForm(data);
+  }
+
   return (
     <div>
-      <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+      <form 
+      className="flex flex-col space-y-4" 
+      onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col">
-          <label htmlFor="username" className="mb-1">E-mail:</label>
+          <label htmlFor="username" className="mb-1">Email:</label>
           <input
-            type="text"
-            name="username"
-            id="username"
-            required
+            {...register("email")}
             className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none focus:border-green-500"
           />
+          {errors.email && (
+            <span className="text-red-500 text-sm">
+              {errors.email.message}
+            </span>
+          )}
         </div>
 
         <div className="flex flex-col">
           <label htmlFor="password" className="mb-1">Senha:</label>
           <input
             type="password"
-            name="password"
-            id="password"
-            required
-            className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none focus:border-green-500"
+            {...register("password")}
+            className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800"
           />
+          {errors.password && (
+            <span className="text-red-500 text-sm">
+              {errors.password.message}
+            </span>
+          )}
         </div>
 
         <button
           type="submit"
-          className="bg-green-500 font-bold text-font-secondary px-4 py-2 rounded-lg hover:bg-green-600 transition"
+          disabled={!isValid}
+          className="bg-green-600 font-bold text-font-secondary px-4 py-2 rounded-lg hover:bg-green-500 cursor-pointer transition disabled:opacity-50 disabled:cursor-not-allowed hover:disabled:bg-green-600"
         >
           Login
         </button>
       </form>
-      <Toaster position="top-center" reverseOrder={false} />
     </div>
-    )
+  )
 }

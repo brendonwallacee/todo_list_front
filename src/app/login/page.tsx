@@ -1,27 +1,41 @@
+"use client";
 
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 import FormLogin from "../ui/form-login";
-import { GET } from "../api/hello/route";
-import { HelloData } from "@/lib/types";
-
-
-async function getHelloData(): Promise<HelloData> {
-  const response = await GET();
-  return response
-}
 
 export default async function Login() {
 
-  const data = await getHelloData();
+  const router = useRouter();
+
+  async function handleRegister(data: any) {
+    const params = new URLSearchParams({
+      username: data.email,
+      password: data.password
+    });
+    const res = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params.toString(),
+    });
+
+    const json = await res.json();
+    if (!res.ok) return toast.error(`${res.status} - ${json}`);
+    console.log(json);
+    router.push("/home");
+  }
 
   return (
     <main className="flex min-h-screen items-center justify-center p-8">
       {/* Caixa central do login */}
       <div className="w-full max-w-md bg-gray-900 rounded-xl shadow-lg p-8 space-y-6">
-        
+
         <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
-        
+
         {/* Formulário */}
-        <FormLogin {...data} />
+        <FormLogin action={handleRegister} />
 
         {/* Link para cadastro */}
         <p className="text-center text-sm text-green-600">
