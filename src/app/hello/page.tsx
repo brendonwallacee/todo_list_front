@@ -1,8 +1,19 @@
-export default async function Api() {
-    const data = await fetch('https://app-todo-list.fly.dev/');
-    const res = await data.json();
 
-    function renderJson(value: any): JSX.Element {
+import React from "react";
+import { GET } from "@/app/api/hello/route";
+import { HelloData } from "@/lib/types";
+
+async function getHello(): Promise<HelloData> {
+  const data = await GET();
+  return data
+  
+}
+
+export default async function Hello() {
+
+  const data = await getHello();
+
+  function renderJson(value: any): React.ReactElement {
     if (value === null) {
       return <span className="text-gray-400">null</span>;
     } else if (Array.isArray(value)) {
@@ -42,13 +53,13 @@ export default async function Api() {
     }
   }
 
-    return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="w-full max-w-3xl bg-gray-900 text-white rounded-lg p-4 overflow-x-auto">
-                <pre className="whitespace-pre-wrap">{renderJson(res)}</pre>
-            </div>
-            
-            <a className="underline text-lg" href="/">Home</a>
-        </main>
-    )
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <div className="w-full max-w-3xl bg-gray-900 text-white rounded-lg p-4 overflow-x-auto">
+        <pre className="whitespace-pre-wrap">{renderJson(data)}</pre>
+      </div>
+
+      <a className="underline text-lg" href="/">Home</a>
+    </main>
+  )
 }
