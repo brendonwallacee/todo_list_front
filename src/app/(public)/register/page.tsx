@@ -1,6 +1,6 @@
 "use client";
 
-import FormRegister from "../ui/form-register";
+import FormRegister from "@/_components/form-register";
 import { toast, Toaster } from "react-hot-toast";
 
 
@@ -20,6 +20,9 @@ async function handleRegister(data: any) {
     const json = await res.json();
     if (!res.ok) return toast.error(`${res.status} - ${json}`);
     toast.success("Cadastro realizado com sucesso!");
+    
+
+
 }
 
 export default function Register() {

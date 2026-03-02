@@ -1,7 +1,7 @@
 
 import React from "react";
 import { GET } from "@/app/api/hello/route";
-import { HelloData } from "@/lib/types";
+import { HelloData } from "@/_lib/types";
 
 async function getHello(): Promise<HelloData> {
   const data = await GET();

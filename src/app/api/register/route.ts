@@ -1,8 +1,8 @@
-import caller from "@/lib/api-caller";
+import caller from "@/_lib/api-caller";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  console.log("O que chegou no POST", req);
+  console.log("O que chegou no POST\n", req);
   try {
     const body = await req.json();
     const response = await caller("/users/", {

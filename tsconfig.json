@@ -23,9 +23,11 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"],
+      "@application/*": ["./src/app/*"],
+      "@root/*": ["./*"],
+      "@lib/*": ["./src/_lib/*"],
+      "@components/*": ["./src/_components/*"]
     }
   },
   "include": [
@@ -35,7 +37,7 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/_components/card.tsx"  ],
   "exclude": [
     "node_modules"
   ]

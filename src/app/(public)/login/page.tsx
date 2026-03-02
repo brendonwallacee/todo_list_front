@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import FormLogin from "../ui/form-login";
+import FormLogin from "@/_components/form-login";
 
-export default async function Login() {
+export default function Login() {
 
   const router = useRouter();
 
@@ -24,7 +24,7 @@ export default async function Login() {
     const json = await res.json();
     if (!res.ok) return toast.error(`${res.status} - ${json}`);
     console.log(json);
-    router.push("/home");
+    router.push("/dashboard");
   }
 
   return (
