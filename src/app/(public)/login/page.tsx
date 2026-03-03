@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import FormLogin from "@/_components/form-login";
+import FormLogin from "@components/form-login";
 
 export default function Login() {
 

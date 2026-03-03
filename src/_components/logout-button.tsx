@@ -11,6 +11,8 @@ export default function LogoutButton() {
   }
 
   return (
-    <button className="underline" onClick={handleLogout}>Voltar</button>
+    <button 
+    className="bg-red-600 font-bold px-4 py-2 rounded-lg hover:bg-red-500 cursor-pointer transition disabled:opacity-50 disabled:cursor-not-allowed hover:disabled:bg-red-600" 
+    onClick={handleLogout}>Sair</button>
   )
 }

@@ -1,4 +1,4 @@
-import caller from "@/_lib/api-caller";
+import caller from "@lib/api-caller";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 

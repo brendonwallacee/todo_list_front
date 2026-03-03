@@ -1,4 +1,4 @@
-import { User } from "@/_lib/types";
+import { User } from "@lib/types";
 import { GET } from "@application/api/user/route";
 import LogoutButton from "@components/logout-button";
 import ProfileTab from "@components/profile";

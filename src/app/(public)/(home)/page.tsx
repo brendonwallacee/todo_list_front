@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import HomePage from '@/app/home-page';
+import HomePage from '@application/home-page';
 
 export const metadata: Metadata = {
   title: 'Boas vindas!'

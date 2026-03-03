@@ -1,6 +1,6 @@
 "use client";
 
-import LogoutButton from "@/_components/logout-button";
+import LogoutButton from "@components/logout-button";
 
 export default function Home() {
   return (

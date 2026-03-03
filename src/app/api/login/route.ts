@@ -1,7 +1,7 @@
-import caller from "@/_lib/api-caller";
+import caller from "@lib/api-caller";
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { getUserSub } from "@/_lib/token";
+import { getUserSub } from "@lib/token";
 
 export async function POST(req: NextRequest) {
   console.log("O que chegou no POST\n", req);

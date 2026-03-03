@@ -1,9 +1,13 @@
 "use client";
 
-import FormRegister from "@/_components/form-register";
+import FormRegister from "@components/form-register";
+import { useRouter } from "next/navigation";
 import { toast, Toaster } from "react-hot-toast";
 
 
+export default function Register() {
+  const router = useRouter()
+  
 async function handleRegister(data: any) {
     const res = await fetch("/api/register", {
       method: "POST",
@@ -17,15 +21,29 @@ async function handleRegister(data: any) {
           password: data.password,
         }),
     });
+
     const json = await res.json();
     if (!res.ok) return toast.error(`${res.status} - ${json}`);
     toast.success("Cadastro realizado com sucesso!");
-    
 
+    const params = new URLSearchParams({
+      username: data.email,
+      password: data.password
+    });
+    const res2 = await fetch("/api/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded",
+      },
+      body: params.toString(),
+    });
 
+    const json2 = await res2.json();
+    if (!res2.ok) return toast.error(`${res2.status} - ${json}`);
+    console.log(json)
+    router.push("/dashboard")
 }
 
-export default function Register() {
 
 
   return (

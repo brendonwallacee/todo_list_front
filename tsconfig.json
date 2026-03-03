@@ -23,11 +23,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
+      "@components/*": ["./src/_components/*"],
       "@application/*": ["./src/app/*"],
-      "@root/*": ["./*"],
       "@lib/*": ["./src/_lib/*"],
-      "@components/*": ["./src/_components/*"]
+      "@/*": ["./src/*"],
+      "@root/*": ["./*"],
     }
   },
   "include": [

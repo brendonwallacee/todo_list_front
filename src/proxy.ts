@@ -1,5 +1,5 @@
 import { type MiddlewareConfig, NextRequest, NextResponse } from "next/server"
-import { isTokenExpired } from "./_lib/token"
+import { isTokenExpired } from "@lib/token"
 import { cookies } from "next/headers"
 
 

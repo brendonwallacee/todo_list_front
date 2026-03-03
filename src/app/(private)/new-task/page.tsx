@@ -1,7 +1,7 @@
 "use client"
 
-import TaskInput from "@/_components/task-input";
-import LogoutButton from "@components/logout-button";
+import HomeButton from "@components/home-button";
+import TaskInput from "@components/task-input";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -50,7 +50,7 @@ export default function NewTask() {
     <main className="flex h-full flex-col items-center p-10">
       <h1>Nova Tarefa</h1>
       <TaskInput action={handleRegisterTask} />
-      <LogoutButton />
+      <HomeButton />
       <Toaster position="top-center" reverseOrder={false} />
     </main>
   )
