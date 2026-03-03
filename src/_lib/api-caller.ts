@@ -1,5 +1,12 @@
 
-export default async function caller(path: string = "", params: any = {}) {
+type Params = {
+  method: string,
+  headers?: {
+  },
+  body?: string
+}
+
+export default async function caller(path: string = "", params?: Params) {
   var url = process.env.URL_API;
   console.log("URL da API", url);
   console.log("PATH", path);

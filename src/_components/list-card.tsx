@@ -15,7 +15,7 @@ export default function ListCards({ data }: { data: Todo[] }) {
   const handleChangeState = (id: number, newState: TodoState) => {
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === id ? { ...task, status: newState } : task)
+        task.id === id ? { ...task, state: newState } : task)
     );
     console.log(`Card ${id} mudou para ${newState}`);
   };
@@ -30,48 +30,58 @@ export default function ListCards({ data }: { data: Todo[] }) {
     )
   }
 
-  const columns: { [key in Exclude<TodoState, TodoState.TRASH>]: Todo[] } = {
-    [TodoState.TODO]: [],
-    [TodoState.DOING]: [],
-    [TodoState.DONE]: []
-  };
-
-  tasks.forEach((task) => {
-    if (columns[task.state !== TodoState.TRASH]) {
-      columns[task.state as TodoState].push(task);
-    }
-  });
+  const todo = tasks.filter((task) => task.state === TodoState.TODO)
+  const doing = tasks.filter((task) => task.state === TodoState.DOING)
+  const done = tasks.filter((task) => task.state === TodoState.DONE)
 
   return (
-    <div className="flex w-full gap-4">
-      {Object.entries(columns).map(([state, tasksInState]) => (
-        <div
-          key={state}
-          className="flex flex-col w-1/3 bg-gray-900 rounded-2xl p-4 gap-2"
-        >
-          <h2 className="font-bold text-white mb-2">
-            {state === TodoState.TODO
-              ? "A fazer"
-              : state === TodoState.DOING
-                ? "Em andamento"
-                : state === TodoState.DONE
-                  ? "Concluído"
-                  : ""
-            }
-          </h2>
+    <div className="flex w-full h-full gap-4">
 
-          {tasksInState.map((task) => (
-            <Card
-              key={task.id}
-              id={task.id}
-              title={task.title}
-              description={task.description}
-              state={task.s}
-              onChangeState={handleChangeState}
-            />
-          ))}
-        </div>
-      ))}
+      <div className="flex flex-col items-center w-1/3 bg-gray-900 rounded-l-2xl p-4 gap-2">
+        <h2 className="font-bold text-white mb-2">A fazer</h2>
+
+        {todo.map((task) => (
+          <Card
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            description={task.description}
+            state={task.state}
+            onChangeState={handleChangeState}
+          />
+        ))}
+      </div>
+
+      <div className="flex flex-col items-center w-1/3 bg-gray-900 p-4 gap-2">
+        <h2 className="font-bold text-white mb-2">Em andamento</h2>
+
+        {doing.map((task) => (
+          <Card
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            description={task.description}
+            state={task.state}
+            onChangeState={handleChangeState}
+          />
+        ))}
+      </div>
+
+      <div className="flex flex-col items-center w-1/3 bg-gray-900 rounded-r-2xl p-4 gap-2">
+        <h2 className="font-bold text-white mb-2">Concluído</h2>
+
+        {done.map((task) => (
+          <Card
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            description={task.description}
+            state={task.state}
+            onChangeState={handleChangeState}
+          />
+        ))}
+      </div>
+
     </div>
   );
 }

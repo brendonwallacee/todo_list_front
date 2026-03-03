@@ -1,5 +1,15 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+# Pra verificar
+
+- [ ] Imprementação das demais funções que retornam da API
+- [ ] Geração dos testes
+- [ ] Ajustes no CI
+- [ ] Refatoração completinha
+- [ ] Desenvolver CD
+- [ ] Template Pull Request
+- [ ] Criar um [README.md](https://github.com/brendonwallacee/todo_list_front/blob/main/README.md) de verdade
+
 ## Getting Started
 
 First, run the development server:
