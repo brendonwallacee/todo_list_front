@@ -1,14 +1,14 @@
-import { TodoState } from "@root/public/enums";
+import { TodoState } from '@root/public/enums';
 
 export type HelloData = {
-    message: string;
+  message: string;
 };
 
 export type User = {
   id: number;
   username: string;
   email: string;
-}
+};
 
 export type Todo = {
   id: number;
@@ -17,8 +17,8 @@ export type Todo = {
   state: TodoState;
   createdAt?: Date;
   updatedAt?: Date;
-}
+};
 
 export type ApiResponse = {
-  todos: Todo[]
-}
+  todos: Todo[];
+};

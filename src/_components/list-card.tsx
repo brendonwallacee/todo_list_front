@@ -1,9 +1,9 @@
-"use client"
+'use client';
 
-import { Todo } from "@lib/types";
-import { useEffect, useState } from "react";
-import Card from "./card";
-import { TodoState } from "@root/public/enums";
+import { Todo } from '@lib/types';
+import { useEffect, useState } from 'react';
+import Card from './card';
+import { TodoState } from '@root/public/enums';
 
 export default function ListCards({ data }: { data: Todo[] }) {
   const [tasks, setTasks] = useState<Todo[]>([]);
@@ -15,7 +15,8 @@ export default function ListCards({ data }: { data: Todo[] }) {
   const handleChangeState = (id: number, newState: TodoState) => {
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === id ? { ...task, state: newState } : task)
+        task.id === id ? { ...task, state: newState } : task,
+      ),
     );
     console.log(`Card ${id} mudou para ${newState}`);
   };
@@ -27,16 +28,15 @@ export default function ListCards({ data }: { data: Todo[] }) {
           <p>Nenhuma tarefa encontrada.</p>
         </div>
       </div>
-    )
+    );
   }
 
-  const todo = tasks.filter((task) => task.state === TodoState.TODO)
-  const doing = tasks.filter((task) => task.state === TodoState.DOING)
-  const done = tasks.filter((task) => task.state === TodoState.DONE)
+  const todo = tasks.filter((task) => task.state === TodoState.TODO);
+  const doing = tasks.filter((task) => task.state === TodoState.DOING);
+  const done = tasks.filter((task) => task.state === TodoState.DONE);
 
   return (
     <div className="flex w-full h-full gap-4">
-
       <div className="flex flex-col items-center w-1/3 bg-gray-900 rounded-l-2xl p-4 gap-2">
         <h2 className="font-bold text-white mb-2">A fazer</h2>
 
@@ -81,7 +81,6 @@ export default function ListCards({ data }: { data: Todo[] }) {
           />
         ))}
       </div>
-
     </div>
   );
 }

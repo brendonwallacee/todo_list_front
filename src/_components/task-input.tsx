@@ -1,14 +1,17 @@
-"use client"
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { TodoState } from "@root/public/enums";
-import { useForm } from "react-hook-form";
-import z from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { TodoState } from '@root/public/enums';
+import { useForm } from 'react-hook-form';
+import z from 'zod';
 
 const taskSchema = z.object({
-  title: z.string().min(3, "O título precisa ter pelo menos 3 caracteres").max(20, "limite ultrapassado"),
+  title: z
+    .string()
+    .min(3, 'O título precisa ter pelo menos 3 caracteres')
+    .max(20, 'limite ultrapassado'),
   description: z.string(),
-  state: z.enum(TodoState)
+  state: z.enum(TodoState),
 });
 
 type TaskFormData = z.infer<typeof taskSchema>;
@@ -18,14 +21,13 @@ type FormTaskProps = {
 };
 
 export default function TaskInput({ action: onSubmitForm }: FormTaskProps) {
-
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<TaskFormData>({
     resolver: zodResolver(taskSchema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   function onSubmit(data: TaskFormData) {
@@ -36,25 +38,28 @@ export default function TaskInput({ action: onSubmitForm }: FormTaskProps) {
     <div>
       <form
         className="flex flex-col space-y-4"
-        onSubmit={handleSubmit(onSubmit)}>
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="flex flex-col">
-          <label htmlFor="title" className="mb-1">Título:</label>
+          <label htmlFor="title" className="mb-1">
+            Título:
+          </label>
           <input
-            {...register("title")}
+            {...register('title')}
             className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none focus:border-green-500"
           />
           {errors.title && (
-            <span className="text-red-500 text-sm">
-              {errors.title.message}
-            </span>
+            <span className="text-red-500 text-sm">{errors.title.message}</span>
           )}
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="description" className="mb-1">Descrição:</label>
+          <label htmlFor="description" className="mb-1">
+            Descrição:
+          </label>
           <input
             type="description"
-            {...register("description")}
+            {...register('description')}
             className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800"
           />
           {errors.description && (
@@ -66,7 +71,7 @@ export default function TaskInput({ action: onSubmitForm }: FormTaskProps) {
 
         <div className="flex w-full">
           <select
-            {...register("state")}
+            {...register('state')}
             className="border p-2 rounded dark:bg-gray-800 w-full"
             defaultValue={TodoState.TODO}
           >
@@ -76,12 +81,9 @@ export default function TaskInput({ action: onSubmitForm }: FormTaskProps) {
           </select>
 
           {errors.state && (
-            <span className="text-red-500 text-sm">
-              {errors.state.message}
-            </span>
+            <span className="text-red-500 text-sm">{errors.state.message}</span>
           )}
         </div>
-
 
         <button
           type="submit"
@@ -92,5 +94,5 @@ export default function TaskInput({ action: onSubmitForm }: FormTaskProps) {
         </button>
       </form>
     </div>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import LogoutButton from "@components/logout-button";
+import LogoutButton from '@components/logout-button';
 
 export default function Home() {
   return (
@@ -14,8 +14,8 @@ export default function Home() {
         </div>
       </div>
       <div>
-          <LogoutButton />
-        </div>
+        <LogoutButton />
+      </div>
     </main>
   );
 }

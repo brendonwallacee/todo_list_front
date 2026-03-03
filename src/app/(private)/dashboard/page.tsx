@@ -1,18 +1,16 @@
-
-import ListCards from "@components/list-card";
-import { ApiResponse } from "@lib/types";
-import { GET } from "@application/api/dashboard/route"
-import HomeButton from "@components/home-button";
+import ListCards from '@components/list-card';
+import { ApiResponse } from '@lib/types';
+import { GET } from '@application/api/dashboard/route';
+import HomeButton from '@components/home-button';
 
 async function getHello() {
-  const data = await GET()
-  const json = await data.json()
-  console.log("Data do getHello", json)
-  return json
+  const data = await GET();
+  const json = await data.json();
+  console.log('Data do getHello', json);
+  return json;
 }
 
 export default async function Dashboard() {
-
   const data: ApiResponse = await getHello();
 
   return (
@@ -21,5 +19,5 @@ export default async function Dashboard() {
       <ListCards data={data.todos} />
       <HomeButton />
     </main>
-  )
+  );
 }

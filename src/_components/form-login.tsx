@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const loginSchema = z.object({
-  email: z.email("E-mail inválido"),
+  email: z.email('E-mail inválido'),
   password: z.string(),
-  });
+});
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -16,14 +16,13 @@ type FormLoginProps = {
 };
 
 export default function FormLogin({ action: onSubmitForm }: FormLoginProps) {
-
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   function onSubmit(data: LoginFormData) {
@@ -32,27 +31,30 @@ export default function FormLogin({ action: onSubmitForm }: FormLoginProps) {
 
   return (
     <div>
-      <form 
-      className="flex flex-col space-y-4" 
-      onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="flex flex-col space-y-4"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="flex flex-col">
-          <label htmlFor="username" className="mb-1">Email:</label>
+          <label htmlFor="username" className="mb-1">
+            Email:
+          </label>
           <input
-            {...register("email")}
+            {...register('email')}
             className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none focus:border-green-500"
           />
           {errors.email && (
-            <span className="text-red-500 text-sm">
-              {errors.email.message}
-            </span>
+            <span className="text-red-500 text-sm">{errors.email.message}</span>
           )}
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="password" className="mb-1">Senha:</label>
+          <label htmlFor="password" className="mb-1">
+            Senha:
+          </label>
           <input
             type="password"
-            {...register("password")}
+            {...register('password')}
             className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800"
           />
           {errors.password && (
@@ -71,5 +73,5 @@ export default function FormLogin({ action: onSubmitForm }: FormLoginProps) {
         </button>
       </form>
     </div>
-  )
+  );
 }

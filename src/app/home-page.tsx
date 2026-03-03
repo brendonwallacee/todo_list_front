@@ -1,15 +1,14 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function HomePage() {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    if (token)
-      router.push("/dashboard")
+    const token = localStorage.getItem('access_token');
+    if (token) router.push('/dashboard');
   }, [router]);
 
   return (
@@ -17,7 +16,8 @@ export default function HomePage() {
       <div className="absolute top-8 right-8">
         <a
           href="/login"
-          className="bg-green-500 font-bold text-font-secondary px-4 py-2 rounded-lg hover:bg-green-600 transition">
+          className="bg-green-500 font-bold text-font-secondary px-4 py-2 rounded-lg hover:bg-green-600 transition"
+        >
           Login
         </a>
       </div>
@@ -28,7 +28,8 @@ export default function HomePage() {
         Aqui você pode gerenciar suas tarefas de forma simples e eficiente.
       </p>
       <p className="text-lg">
-        Como prova que nossa API também já está funcionando corretamente, vocé pode ver o resultado da API clicando
+        Como prova que nossa API também já está funcionando corretamente, vocé
+        pode ver o resultado da API clicando
         <a className="underline" href="/hello">
           aqui
         </a>

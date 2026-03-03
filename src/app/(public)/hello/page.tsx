@@ -1,16 +1,13 @@
-
-import React from "react";
-import { GET } from "@application/api/hello/route";
-import { HelloData } from "@lib/types";
+import React from 'react';
+import { GET } from '@application/api/hello/route';
+import { HelloData } from '@lib/types';
 
 async function getHello(): Promise<HelloData> {
   const data = await GET();
-  return data
-  
+  return data;
 }
 
 export default async function Hello() {
-
   const data = await getHello();
 
   function renderJson(value: any): React.ReactElement {
@@ -59,7 +56,9 @@ export default async function Hello() {
         <pre className="whitespace-pre-wrap">{renderJson(data)}</pre>
       </div>
 
-      <a className="underline text-lg" href="/">Home</a>
+      <a className="underline text-lg" href="/">
+        Home
+      </a>
     </main>
-  )
+  );
 }

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -27,7 +23,7 @@
       "@application/*": ["./src/app/*"],
       "@lib/*": ["./src/_lib/*"],
       "@/*": ["./src/*"],
-      "@root/*": ["./*"],
+      "@root/*": ["./*"]
     }
   },
   "include": [
@@ -36,9 +32,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-, "src/_components/card.tsx"  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "**/*.mts",
+    "src/_components/card.tsx"
+  ],
+  "exclude": ["node_modules"]
 }

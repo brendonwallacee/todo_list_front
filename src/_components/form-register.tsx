@@ -1,18 +1,19 @@
-"use client";
+'use client';
 
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-const registerSchema = z.object({
-  username: z.string().min(3, "Usuário deve ter pelo menos 3 caracteres"),
-  email: z.email("E-mail inválido"),
-  password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
-  confirmPassword: z.string(),
-})
+const registerSchema = z
+  .object({
+    username: z.string().min(3, 'Usuário deve ter pelo menos 3 caracteres'),
+    email: z.email('E-mail inválido'),
+    password: z.string().min(6, 'Senha deve ter pelo menos 6 caracteres'),
+    confirmPassword: z.string(),
+  })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Senhas devem ser iguais",
-    path: ["confirmPassword"],
+    message: 'Senhas devem ser iguais',
+    path: ['confirmPassword'],
   });
 
 type RegisterFormData = z.infer<typeof registerSchema>;
@@ -21,15 +22,16 @@ type FormRegisterProps = {
   action: (data: RegisterFormData) => void;
 };
 
-export default function FormRegister({ action: onSubmitForm }: FormRegisterProps) {
-
+export default function FormRegister({
+  action: onSubmitForm,
+}: FormRegisterProps) {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   function onSubmit(data: RegisterFormData) {
@@ -38,14 +40,14 @@ export default function FormRegister({ action: onSubmitForm }: FormRegisterProps
 
   return (
     <div>
-      <form 
-      className="flex flex-col space-y-4" 
-      onSubmit={handleSubmit(onSubmit)}
+      <form
+        className="flex flex-col space-y-4"
+        onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col">
           <label>Usuário:</label>
           <input
-            {...register("username")}
+            {...register('username')}
             className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none focus:border-green-500"
           />
           {errors.username && (
@@ -55,23 +57,25 @@ export default function FormRegister({ action: onSubmitForm }: FormRegisterProps
           )}
         </div>
         <div className="flex flex-col">
-          <label htmlFor="username" className="mb-1">Email:</label>
+          <label htmlFor="username" className="mb-1">
+            Email:
+          </label>
           <input
-            {...register("email")}
+            {...register('email')}
             className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none focus:border-green-500"
           />
           {errors.email && (
-            <span className="text-red-500 text-sm">
-              {errors.email.message}
-            </span>
+            <span className="text-red-500 text-sm">{errors.email.message}</span>
           )}
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="password" className="mb-1">Senha:</label>
+          <label htmlFor="password" className="mb-1">
+            Senha:
+          </label>
           <input
             type="password"
-            {...register("password")}
+            {...register('password')}
             className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800"
           />
           {errors.password && (
@@ -81,10 +85,12 @@ export default function FormRegister({ action: onSubmitForm }: FormRegisterProps
           )}
         </div>
         <div className="flex flex-col">
-          <label htmlFor="password" className="mb-1">Repita a senha:</label>
+          <label htmlFor="password" className="mb-1">
+            Repita a senha:
+          </label>
           <input
             type="password"
-            {...register("confirmPassword")}
+            {...register('confirmPassword')}
             className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800"
           />
           {errors.confirmPassword && (
@@ -103,5 +109,5 @@ export default function FormRegister({ action: onSubmitForm }: FormRegisterProps
         </button>
       </form>
     </div>
-  )
+  );
 }

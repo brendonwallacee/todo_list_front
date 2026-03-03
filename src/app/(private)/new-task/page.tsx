@@ -1,22 +1,20 @@
-"use client"
+'use client';
 
-import HomeButton from "@components/home-button";
-import TaskInput from "@components/task-input";
-import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
-
+import HomeButton from '@components/home-button';
+import TaskInput from '@components/task-input';
+import { useRouter } from 'next/navigation';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function NewTask() {
-
   const router = useRouter();
 
   async function handleRegisterTask(data: any) {
-    const res = await fetch("/api/new-task", {
-      method: "POST",
-      body: JSON.stringify(data)
+    const res = await fetch('/api/new-task', {
+      method: 'POST',
+      body: JSON.stringify(data),
     });
     const json = await res.json();
-    if (!res.ok) return toast.error(`${res.status} - ${json}`)
+    if (!res.ok) return toast.error(`${res.status} - ${json}`);
     toast.custom((t) => (
       <div className="bg-gray-900 text-white p-4 rounded-xl shadow-lg flex flex-col gap-3">
         <span>Tarefa cadastrada com sucesso! Deseja cadastrar outra?</span>
@@ -35,7 +33,7 @@ export default function NewTask() {
           <button
             onClick={() => {
               toast.dismiss(t.id);
-              router.push("/dashboard"); // ou qualquer rota
+              router.push('/dashboard'); // ou qualquer rota
             }}
             className="px-3 py-1 bg-gray-700 rounded-md hover:bg-gray-600"
           >
@@ -53,5 +51,5 @@ export default function NewTask() {
       <HomeButton />
       <Toaster position="top-center" reverseOrder={false} />
     </main>
-  )
+  );
 }
