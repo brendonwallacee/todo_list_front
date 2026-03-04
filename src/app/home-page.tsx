@@ -1,16 +1,4 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-
 export default function HomePage() {
-  const router = useRouter();
-
-  useEffect(() => {
-    const token = localStorage.getItem('access_token');
-    if (token) router.push('/dashboard');
-  }, [router]);
-
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="absolute top-8 right-8">
@@ -29,8 +17,11 @@ export default function HomePage() {
       </p>
       <p className="text-lg">
         Como prova que nossa API também já está funcionando corretamente, vocé
-        pode ver o resultado da API clicando
-        <a className="underline" href="/hello">
+        pode ver o resultado da API clicando{' '}
+        <a
+          className="underline hover:text-green-500 hover:cursor-pointer hover:font-bold"
+          href="/hello"
+        >
           aqui
         </a>
         .

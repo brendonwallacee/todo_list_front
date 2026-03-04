@@ -1,4 +1,4 @@
-'use client';
+import HomeButton from '@components/home-button';
 
 export default function Login() {
   return (
@@ -12,9 +12,7 @@ export default function Login() {
 
       {/* Link Home */}
       <div className="absolute top-8 right-8">
-        <a href="/" className="underline hover:text-green-500 transition">
-          Home
-        </a>
+        <HomeButton />
       </div>
     </main>
   );

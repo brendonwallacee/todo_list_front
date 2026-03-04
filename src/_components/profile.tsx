@@ -1,5 +1,3 @@
-'use client';
-
 import { User } from '@/_lib/types';
 
 export default function ProfileTab({ username, email }: User) {

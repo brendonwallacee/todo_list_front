@@ -2,6 +2,7 @@ import caller from '@lib/api-caller';
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { getUserSub } from '@lib/token';
+import { ApiError } from '@lib/errors';
 
 export async function POST(req: NextRequest) {
   console.log('O que chegou no POST\n', req);
@@ -47,14 +48,10 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json(response);
-  } catch (err: any) {
-    const detalhe =
-      err instanceof Error && err.cause ? (err.cause as any).detalhe : null;
-    const statusCode =
-      err instanceof Error && err.cause
-        ? ((err.cause as any).status ?? 500)
-        : 500;
-
-    return NextResponse.json(detalhe, { status: statusCode });
+  } catch (err: unknown) {
+    if (err instanceof ApiError) {
+      throw err;
+    }
+    throw new Error('Erro interno');
   }
 }

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     'React',
     'TypeScript',
     'Tailwind CSS',
-    'Todo List',
+    'TodoDTO List',
     'FastAPI',
   ],
 };

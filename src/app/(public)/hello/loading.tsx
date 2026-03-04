@@ -1,4 +1,4 @@
-'use client';
+import HomeButton from '@components/home-button';
 
 export default function Hello() {
   return (
@@ -10,9 +10,7 @@ export default function Hello() {
           <div className="w-4 h-4 bg-green-500 rounded-full animate-bounce delay-500"></div>
         </div>
       </div>
-      <a className="underline" href="/">
-        Home
-      </a>
+      <HomeButton />
     </main>
   );
 }

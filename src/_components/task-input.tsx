@@ -1,23 +1,12 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { TodoInput, todoInputSchema } from '@lib/schemas';
 import { TodoState } from '@root/public/enums';
 import { useForm } from 'react-hook-form';
-import z from 'zod';
-
-const taskSchema = z.object({
-  title: z
-    .string()
-    .min(3, 'O título precisa ter pelo menos 3 caracteres')
-    .max(20, 'limite ultrapassado'),
-  description: z.string(),
-  state: z.enum(TodoState),
-});
-
-type TaskFormData = z.infer<typeof taskSchema>;
 
 type FormTaskProps = {
-  action: (data: TaskFormData) => void;
+  action: (data: TodoInput) => void;
 };
 
 export default function TaskInput({ action: onSubmitForm }: FormTaskProps) {
@@ -25,12 +14,12 @@ export default function TaskInput({ action: onSubmitForm }: FormTaskProps) {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<TaskFormData>({
-    resolver: zodResolver(taskSchema),
+  } = useForm<TodoInput>({
+    resolver: zodResolver(todoInputSchema),
     mode: 'onChange',
   });
 
-  function onSubmit(data: TaskFormData) {
+  function onSubmit(data: TodoInput) {
     onSubmitForm(data);
   }
 

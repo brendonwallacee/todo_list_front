@@ -1,12 +1,12 @@
 'use client';
 
-import { Todo } from '@lib/types';
+import { TodoDTO } from '@lib/types';
+import { TodoState } from '@root/public/enums';
 import { useEffect, useState } from 'react';
 import Card from './card';
-import { TodoState } from '@root/public/enums';
 
-export default function ListCards({ data }: { data: Todo[] }) {
-  const [tasks, setTasks] = useState<Todo[]>([]);
+export default function ListCards({ data }: { data: TodoDTO[] }) {
+  const [tasks, setTasks] = useState<TodoDTO[]>([]);
 
   useEffect(() => {
     setTasks(data);

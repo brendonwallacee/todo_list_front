@@ -1,6 +1,7 @@
 'use client';
 
 import FormRegister from '@components/form-register';
+import HomeButton from '@components/home-button';
 import { useRouter } from 'next/navigation';
 import { toast, Toaster } from 'react-hot-toast';
 
@@ -51,9 +52,7 @@ export default function Register() {
       </div>
 
       <div className="absolute top-8 right-8">
-        <a href="/" className="underline hover:text-green-500 transition">
-          Home
-        </a>
+        <HomeButton />
       </div>
       <Toaster position="top-center" reverseOrder={false} />
     </main>

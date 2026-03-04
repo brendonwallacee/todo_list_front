@@ -1,53 +1,33 @@
-import React from 'react';
 import { GET } from '@application/api/hello/route';
-import { HelloData } from '@lib/types';
+import HomeButton from '@components/home-button';
+import { ApiError } from '@lib/errors';
+import { Message } from '@lib/types';
 
-async function getHello(): Promise<HelloData> {
-  const data = await GET();
-  return data;
+async function getHello(): Promise<Message> {
+  try {
+    const data = await GET();
+    return data;
+  } catch (err: unknown) {
+    if (err instanceof ApiError) {
+      return { message: err.message };
+    }
+    return { message: err instanceof Error ? err.message : 'Erro interno' };
+  }
 }
 
 export default async function Hello() {
   const data = await getHello();
 
-  function renderJson(value: any): React.ReactElement {
-    if (value === null) {
-      return <span className="text-gray-400">null</span>;
-    } else if (Array.isArray(value)) {
+  function renderJson(value: Message): React.ReactElement {
+    if (typeof value === 'object') {
       return (
-        <span>
-          [
-          {value.map((v, i) => (
-            <span key={i}>
-              {renderJson(v)}
-              {i < value.length - 1 ? ', ' : ''}
-            </span>
-          ))}
-          ]
-        </span>
+        <pre>
+          <span className="text-yellow-400">{`"message"`}</span>:{' '}
+          <span className="text-green-400">{`"${value.message}"`}</span>
+        </pre>
       );
-    } else if (typeof value === 'object') {
-      return (
-        <span>
-          {'{'}
-          {Object.entries(value).map(([k, v], i, arr) => (
-            <div key={k} className="pl-4">
-              <span className="text-yellow-400">"{k}"</span>: {renderJson(v)}
-              {i < arr.length - 1 ? ',' : ''}
-            </div>
-          ))}
-          {'}'}
-        </span>
-      );
-    } else if (typeof value === 'string') {
-      return <span className="text-green-400">"{value}"</span>;
-    } else if (typeof value === 'number') {
-      return <span className="text-blue-400">{value}</span>;
-    } else if (typeof value === 'boolean') {
-      return <span className="text-purple-400">{value.toString()}</span>;
-    } else {
-      return <span>{value}</span>;
     }
+    return <span className="text-green-400">{`"${value}"`}</span>;
   }
 
   return (
@@ -55,10 +35,7 @@ export default async function Hello() {
       <div className="w-full max-w-3xl bg-gray-900 text-white rounded-lg p-4 overflow-x-auto">
         <pre className="whitespace-pre-wrap">{renderJson(data)}</pre>
       </div>
-
-      <a className="underline text-lg" href="/">
-        Home
-      </a>
+      <HomeButton />
     </main>
   );
 }

@@ -14,13 +14,6 @@ interface CardProps {
   onChangeState: (id: number, newState: TodoState) => void;
 }
 
-const stateLabels: Record<TodoState, string> = {
-  [TodoState.TODO]: 'A fazer',
-  [TodoState.DOING]: 'Em andamento',
-  [TodoState.DONE]: 'Concluído',
-  [TodoState.TRASH]: 'Lixeira',
-};
-
 export default function Card({
   id,
   title,

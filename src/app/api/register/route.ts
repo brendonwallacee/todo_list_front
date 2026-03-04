@@ -1,4 +1,5 @@
 import caller from '@lib/api-caller';
+import { ApiError } from '@lib/errors';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -14,14 +15,10 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(response);
-  } catch (err: any) {
-    const detalhe =
-      err instanceof Error && err.cause ? (err.cause as any).detalhe : null;
-    const statusCode =
-      err instanceof Error && err.cause
-        ? ((err.cause as any).status ?? 500)
-        : 500;
-
-    return NextResponse.json(detalhe, { status: statusCode });
+  } catch (err: unknown) {
+    if (err instanceof ApiError) {
+      throw err;
+    }
+    throw new Error('Erro interno');
   }
 }

@@ -23,7 +23,7 @@ export async function getUserSub() {
 export async function isTokenExpired(request: NextRequest) {
   const token = request.cookies.get('access_token');
   if (!token) {
-    const res = await fetch('/api/logout');
+    await fetch('/api/logout');
     return true;
   }
   try {
@@ -32,8 +32,8 @@ export async function isTokenExpired(request: NextRequest) {
     const currentTime = Date.now() / 1000;
 
     return payload.exp < currentTime;
-  } catch (err) {
-    const res = await fetch('/api/logout');
+  } catch {
+    await fetch('/api/logout');
     return true;
   }
 }

@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import FormLogin from '@components/form-login';
+import HomeButton from '@components/home-button';
 
 export default function Login() {
   const router = useRouter();
@@ -49,9 +50,7 @@ export default function Login() {
 
       {/* Link Home */}
       <div className="absolute top-8 right-8">
-        <a href="/" className="underline hover:text-green-500 transition">
-          Home
-        </a>
+        <HomeButton />
       </div>
     </main>
   );

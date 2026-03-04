@@ -1,6 +1,6 @@
 import { TodoState } from '@root/public/enums';
 
-export type HelloData = {
+export type Message = {
   message: string;
 };
 
@@ -15,10 +15,10 @@ export type Todo = {
   title: string;
   description: string;
   state: TodoState;
-  createdAt?: Date;
-  updatedAt?: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
-export type ApiResponse = {
+export type TodoList = {
   todos: Todo[];
 };

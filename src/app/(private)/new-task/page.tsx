@@ -2,13 +2,14 @@
 
 import HomeButton from '@components/home-button';
 import TaskInput from '@components/task-input';
+import { TodoInput } from '@lib/schemas';
 import { useRouter } from 'next/navigation';
 import toast, { Toaster } from 'react-hot-toast';
 
 export default function NewTask() {
   const router = useRouter();
 
-  async function handleRegisterTask(data: any) {
+  async function handleRegisterTask(data: TodoInput) {
     const res = await fetch('/api/new-task', {
       method: 'POST',
       body: JSON.stringify(data),

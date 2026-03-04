@@ -1,11 +1,17 @@
+import { ApiError } from './errors';
+
 type Params = {
   method: string;
-  headers?: {};
+  headers?: {
+    'Content-Type'?: string;
+    Authorization?: string;
+    accept?: string;
+  };
   body?: string;
 };
 
 export default async function caller(path: string = '', params?: Params) {
-  var url = process.env.URL_API;
+  let url = process.env.URL_API;
   console.log('URL da API', url);
   console.log('PATH', path);
   console.log('PARAMS', params);
@@ -20,10 +26,7 @@ export default async function caller(path: string = '', params?: Params) {
   const json = await response.json();
 
   if (!response.ok) {
-    throw new Error('Erro ao chamar a API', {
-      cause: { detalhe: json.detail, status: response.status },
-    });
+    throw new ApiError('Erro ao chamar a API', json.detail, response.status);
   }
-
   return json;
 }

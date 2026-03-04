@@ -1,7 +1,7 @@
-import ListCards from '@components/list-card';
-import { ApiResponse } from '@lib/types';
 import { GET } from '@application/api/dashboard/route';
 import HomeButton from '@components/home-button';
+import ListCards from '@components/list-card';
+import { TodoList } from '@lib/types';
 
 async function getHello() {
   const data = await GET();
@@ -11,7 +11,7 @@ async function getHello() {
 }
 
 export default async function Dashboard() {
-  const data: ApiResponse = await getHello();
+  const data: TodoList = await getHello();
 
   return (
     <main className="flex h-full w-full flex-col items-center p-10">
