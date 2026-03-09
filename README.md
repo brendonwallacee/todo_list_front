@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - [ ] Imprementação das demais funções que retornam da API
 - [ ] Geração dos testes
 - [ ] Ajustes no CI
-- [ ] Refatoração completinha
+- [x] Refatoração completinha
 - [ ] Desenvolver CD
 - [ ] Template Pull Request
 - [ ] Criar um [README.md](https://github.com/brendonwallacee/todo_list_front/blob/main/README.md) de verdade

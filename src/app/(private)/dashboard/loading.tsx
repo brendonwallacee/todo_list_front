@@ -1,4 +1,4 @@
-import LogoutButton from '@components/logout-button';
+import LogoutButton from '@features/auth/components/logout-button';
 
 export default function Home() {
   return (

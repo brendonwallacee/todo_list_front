@@ -19,10 +19,10 @@
       }
     ],
     "paths": {
-      "@components/*": ["./src/_components/*"],
+      "@components/*": ["./src/components/*"],
       "@application/*": ["./src/app/*"],
-      "@lib/*": ["./src/_lib/*"],
-      "@/*": ["./src/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@features/*": ["./src/features/*"],
       "@root/*": ["./*"]
     }
   },
@@ -32,8 +32,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts",
-    "src/_components/card.tsx"
+    "**/*.mts"
   ],
   "exclude": ["node_modules"]
 }

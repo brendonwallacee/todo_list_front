@@ -1,22 +1,21 @@
-import { GET } from '@application/api/hello/route';
-import HomeButton from '@components/home-button';
-import { ApiError } from '@lib/errors';
 import { Message } from '@lib/types';
+import HomeButton from '@components/navigation/home-button';
+import { ApiError } from '@lib/errors/api-error';
+import { getHello } from './_services/get-hello';
 
-async function getHello(): Promise<Message> {
+async function loadHello(): Promise<Message> {
   try {
-    const data = await GET();
-    return data;
+    return await getHello();
   } catch (err: unknown) {
     if (err instanceof ApiError) {
-      return { message: err.message };
+      return {message: err.detalhe ?? err.message};
     }
-    return { message: err instanceof Error ? err.message : 'Erro interno' };
+    return {message: err instanceof Error ? err.message : 'Erro interno'};
   }
 }
 
 export default async function Hello() {
-  const data = await getHello();
+  const data = await loadHello();
 
   function renderJson(value: Message): React.ReactElement {
     if (typeof value === 'object') {

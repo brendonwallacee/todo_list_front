@@ -1,30 +1,30 @@
 'use client';
 
+import { loginAction } from '@features/auth/actions';
+import FormLogin from '@features/auth/components/form-login';
+import { LoginInput } from '@features/auth/schemas';
+import HomeButton from '@components/navigation/home-button';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-hot-toast';
-import FormLogin from '@components/form-login';
-import HomeButton from '@components/home-button';
+import { useTransition } from 'react';
+import { toast, Toaster } from 'react-hot-toast';
 
 export default function Login() {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  async function handleRegister(data: any) {
-    const params = new URLSearchParams({
-      username: data.email,
-      password: data.password,
-    });
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: params.toString(),
-    });
+  function handleLogin(data: LoginInput) {
+    startTransition(async () => {
+      const result = await loginAction(data);
 
-    const json = await res.json();
-    if (!res.ok) return toast.error(`${res.status} - ${json}`);
-    console.log(json);
-    router.push('/dashboard');
+      if (!result.ok) {
+        toast.error(result.message ?? 'Não foi possível entrar');
+        return;
+      }
+
+      router.push('/dashboard');
+      router.refresh();
+    });
   }
 
   return (
@@ -34,17 +34,17 @@ export default function Login() {
         <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
 
         {/* Formulário */}
-        <FormLogin action={handleRegister} />
+        <FormLogin action={handleLogin} isPending={isPending} />
 
         {/* Link para cadastro */}
         <p className="text-center text-sm text-green-600">
           Ainda não possui uma conta?{' '}
-          <a
+          <Link
             href="/register"
             className="underline text-green-600 hover:text-green-400 transition"
           >
             Cadastre-se
-          </a>
+          </Link>
         </p>
       </div>
 
@@ -52,6 +52,7 @@ export default function Login() {
       <div className="absolute top-8 right-8">
         <HomeButton />
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </main>
   );
 }

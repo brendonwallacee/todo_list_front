@@ -1,6 +1,6 @@
-import { type MiddlewareConfig, NextRequest, NextResponse } from 'next/server';
-import { isTokenExpired } from '@lib/token';
+import { isTokenExpired } from '@features/auth/services/session';
 import { cookies } from 'next/headers';
+import { type MiddlewareConfig, NextRequest, NextResponse } from 'next/server';
 
 const publicRoutes = [
   { path: '/', whenAuthenticated: 'next' },
@@ -17,12 +17,10 @@ export async function proxy(request: NextRequest) {
   const token = request.cookies.get('access_token')?.value;
 
   if (!token && publicRoute) {
-    console.log('Não tem token, mas é rota publica');
     return NextResponse.next();
   }
 
   if (!token && !publicRoute) {
-    console.log('Não tem token e a rota não é publica');
     const redirectUrl = new URL(
       REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE,
       request.url,
@@ -32,19 +30,16 @@ export async function proxy(request: NextRequest) {
   }
 
   if (token && publicRoute && publicRoute.whenAuthenticated == 'redirect') {
-    console.log('Tem token, a rota é publica e é pra redirecionar');
     const redirectUrl = new URL('/dashboard', request.url);
-    console.log(redirectUrl);
+
     return NextResponse.redirect(redirectUrl);
   }
 
   if (token && !publicRoute) {
     const isExpired = await isTokenExpired(request);
     if (!isExpired) {
-      console.log('Tem token e a rota não é publica');
       return NextResponse.next();
     } else {
-      console.log('Tokem expirado');
       (await cookies()).delete('access_token');
       (await cookies()).delete('sub');
       const redirectUrl = new URL(

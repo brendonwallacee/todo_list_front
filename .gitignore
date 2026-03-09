@@ -2,6 +2,7 @@
 
 # VS Code
 .vscode/
+CONTEXTO_ASSISTENTE.md
 
 # dependencies
 /node_modules
