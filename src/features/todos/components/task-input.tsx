@@ -28,9 +28,9 @@ export default function TaskInput({
   }
 
   return (
-    <div>
+    <div className="w-full">
       <form
-        className="flex flex-col space-y-4"
+        className="flex flex-col space-y-4 w-full"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col">
@@ -39,7 +39,7 @@ export default function TaskInput({
           </label>
           <input
             {...register('title')}
-            className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none focus:border-green-500"
+            className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/30 transition"
           />
           {errors.title && (
             <span className="text-red-500 text-sm">{errors.title.message}</span>
@@ -53,7 +53,7 @@ export default function TaskInput({
           <input
             type="description"
             {...register('description')}
-            className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800"
+            className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/30 transition"
           />
           {errors.description && (
             <span className="text-red-500 text-sm">
@@ -65,7 +65,7 @@ export default function TaskInput({
         <div className="flex w-full">
           <select
             {...register('state')}
-            className="border p-2 rounded dark:bg-gray-800 w-full"
+            className="border border-gray-700 p-2 rounded bg-gray-800 text-white w-full focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/30 transition"
             defaultValue={TodoState.TODO}
           >
             <option value={TodoState.TODO}>A fazer</option>

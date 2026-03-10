@@ -23,9 +23,11 @@ export default async function Profile() {
   const user: User = await getUser(token, sub);
 
   return (
-    <main className="flex h-full w-[50%] flex-col items-center p-10">
-      <h1 className="text-5xl">Perfil</h1>
-      <ProfileTab id={user.id} username={user.username} email={user.email} />
+    <main className="flex w-full flex-col items-center px-4 py-8 sm:px-8 gap-6">
+      <h1 className="text-3xl sm:text-5xl font-bold">Perfil</h1>
+      <div className="w-full max-w-lg">
+        <ProfileTab id={user.id} username={user.username} email={user.email} />
+      </div>
       <LogoutButton />
     </main>
   );

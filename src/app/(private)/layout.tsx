@@ -10,7 +10,7 @@ export default function DashboardLayout({
   const pathname = usePathname();
 
   const getButtonClass = (path: string) =>
-    `h-full w-full flex items-center justify-center cursor-pointer center font-bold transition-colors
+    `flex-1 min-w-[120px] px-3 py-2 rounded-md flex items-center justify-center cursor-pointer font-semibold transition-colors text-sm sm:text-base
   ${
     pathname === path
       ? 'bg-green-600 hover:bg-green-500'
@@ -18,15 +18,14 @@ export default function DashboardLayout({
   }`;
 
   return (
-    <div className="flex h-screen w-screen">
-      <main className="flex h-full w-full flex-col items-center">
-        <div className="flex flex-row gap-2 bg-gray-600 w-full h-10">
+    <div className="flex min-h-screen w-full">
+      <main className="flex min-h-screen w-full flex-col items-center">
+        <div className="sticky top-0 z-10 flex flex-wrap gap-2 bg-gray-900/90 border-b border-green-900/40 w-full px-2 py-2">
           <button
             className={getButtonClass('/dashboard')}
             onClick={() => router.push('/dashboard')}
           >
-            {' '}
-            Dashboard{' '}
+            Dashboard
           </button>
           <button
             className={getButtonClass('/new-task')}
@@ -41,7 +40,7 @@ export default function DashboardLayout({
             Perfil
           </button>
         </div>
-        <div className="flex items-center justify-center w-full h-full">
+        <div className="flex items-center justify-center w-full flex-1">
           {children}
         </div>
       </main>

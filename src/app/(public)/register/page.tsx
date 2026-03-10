@@ -28,14 +28,19 @@ export default function Register() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center p-8">
-      <div className="w-full max-w-md bg-gray-900 rounded-xl shadow-lg p-8 space-y-6">
-        <h1 className="text-2xl font-bold text-center mb-4">Cadastre-se</h1>
+    <main className="relative flex min-h-screen items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md bg-gray-900/90 text-white rounded-2xl shadow-2xl border border-green-900/40 p-6 sm:p-8 space-y-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center">
+          Cadastre-se
+        </h1>
+        <p className="text-sm text-center text-gray-300">
+          Crie sua conta para começar a organizar suas tarefas.
+        </p>
 
         <FormRegister action={handleRegister} isPending={isPending} />
       </div>
 
-      <div className="absolute top-8 right-8">
+      <div className="absolute top-6 right-6">
         <HomeButton />
       </div>
       <Toaster position="top-center" reverseOrder={false} />

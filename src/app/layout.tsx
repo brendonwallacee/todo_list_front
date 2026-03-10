@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   authors: [
     { name: 'Brendon Wallace', url: 'https://github.com/brendonwallacee' },
   ],
+  manifest: '/manifest.json',
+  icons: {
+    icon: ['/favicon.ico', '/icon0.svg', '/icon1.png'],
+    apple: '/apple-touch-icon.png',
+  },
   keywords: [
     'Next.js',
     'React',

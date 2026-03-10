@@ -82,13 +82,13 @@ export default function Card({
   }
 
   return (
-    <div className="relative flex flex-col p-2 w-[95%] bg-white rounded-sm shadow-lg dark:bg-gray-800">
-      <h1 className="font-bold p-2">{title}</h1>
-      <p>{description}</p>
+    <div className="relative flex flex-col gap-2 w-full bg-gray-950/80 text-white rounded-xl border border-green-900/30 p-4 shadow-md">
+      <h1 className="font-bold text-lg">{title}</h1>
+      <p className="text-sm text-gray-200">{description}</p>
       <div className="flex h-full w-full bg-transparent items-center justify-center">
         {state === TodoState.TODO && (
           <button onClick={goToNext} aria-label="Avancar tarefa para Fazendo">
-            <ChevronDoubleRightIcon className="flex h-8 w-8 text-green-600 hover:text-green-500" />
+            <ChevronDoubleRightIcon className="flex h-8 w-8 text-green-500 hover:text-green-400" />
           </button>
         )}
         {state === TodoState.DOING && (
@@ -97,13 +97,13 @@ export default function Card({
               onClick={goToPrevious}
               aria-label="Retornar tarefa para A fazer"
             >
-              <ChevronDoubleLeftIcon className="flex h-8 w-8 text-green-600 hover:text-green-500" />
+              <ChevronDoubleLeftIcon className="flex h-8 w-8 text-green-500 hover:text-green-400" />
             </button>
             <button
               onClick={goToNext}
               aria-label="Avancar tarefa para Concluída"
             >
-              <ChevronDoubleRightIcon className="flex h-8 w-8 text-green-600 hover:text-green-500" />
+              <ChevronDoubleRightIcon className="flex h-8 w-8 text-green-500 hover:text-green-400" />
             </button>
           </div>
         )}
@@ -112,13 +112,13 @@ export default function Card({
             onClick={goToPrevious}
             aria-label="Retornar tarefa para Fazendo"
           >
-            <ChevronDoubleLeftIcon className="flex h-8 w-8 text-green-600 hover:text-green-500" />
+            <ChevronDoubleLeftIcon className="flex h-8 w-8 text-green-500 hover:text-green-400" />
           </button>
         )}
       </div>
 
       <button onClick={lixo} aria-label="Excluir esta tarefa">
-        <TrashIcon className="absolute top-2 right-2 w-4 h-4 hover:text-red-800" />
+        <TrashIcon className="absolute top-3 right-3 w-4 h-4 text-red-400 hover:text-red-300" />
       </button>
     </div>
   );

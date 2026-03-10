@@ -28,20 +28,22 @@ export default function Login() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center p-8">
-      {/* Caixa central do login */}
-      <div className="w-full max-w-md bg-gray-900 rounded-xl shadow-lg p-8 space-y-6">
-        <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
+    <main className="relative flex min-h-screen items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md bg-gray-900/90 text-white rounded-2xl shadow-2xl border border-green-900/40 p-6 sm:p-8 space-y-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center">Login</h1>
+        <p className="text-sm text-center text-gray-300">
+          Acesse sua conta para ver suas tarefas.
+        </p>
 
         {/* Formulário */}
         <FormLogin action={handleLogin} isPending={isPending} />
 
         {/* Link para cadastro */}
-        <p className="text-center text-sm text-green-600">
+        <p className="text-center text-sm text-green-300">
           Ainda não possui uma conta?{' '}
           <Link
             href="/register"
-            className="underline text-green-600 hover:text-green-400 transition"
+            className="underline text-green-300 hover:text-green-200 transition"
           >
             Cadastre-se
           </Link>
@@ -49,7 +51,7 @@ export default function Login() {
       </div>
 
       {/* Link Home */}
-      <div className="absolute top-8 right-8">
+      <div className="absolute top-6 right-6">
         <HomeButton />
       </div>
       <Toaster position="top-center" reverseOrder={false} />

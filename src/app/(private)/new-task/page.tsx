@@ -52,9 +52,13 @@ export default function NewTask() {
   }
 
   return (
-    <main className="flex h-full flex-col items-center p-10">
-      <h1>Nova Tarefa</h1>
-      <TaskInput action={handleRegisterTask} isPending={isPending} />
+    <main className="flex w-full flex-col items-center px-4 py-8 sm:px-8 gap-6">
+      <div className="w-full max-w-md bg-gray-900/90 text-white rounded-2xl shadow-2xl border border-green-900/40 p-6 sm:p-8 space-y-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center">
+          Nova Tarefa
+        </h1>
+        <TaskInput action={handleRegisterTask} isPending={isPending} />
+      </div>
       <HomeButton />
       <Toaster position="top-center" reverseOrder={false} />
     </main>

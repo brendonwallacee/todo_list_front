@@ -24,8 +24,8 @@ export default function ListCards({ data }: { data: TodoList }) {
 
   if (tasks.length === 0) {
     return (
-      <div className="flex w-[80%] h-full bg-transparent rounded-xl shadow-lg space-x-2 items-center justify-center">
-        <div className="flex h-full w-full items-center justify-center bg-gray-900 gap-2">
+      <div className="flex w-full justify-center">
+        <div className="flex w-full max-w-3xl items-center justify-center bg-gray-900/90 text-white rounded-2xl border border-green-900/40 p-8 shadow-2xl">
           <p>Nenhuma tarefa encontrada.</p>
         </div>
       </div>
@@ -37,9 +37,9 @@ export default function ListCards({ data }: { data: TodoList }) {
   const done = tasks.filter((task) => task.state === TodoState.DONE);
 
   return (
-    <div className="flex w-full h-full gap-4">
-      <div className="flex flex-col items-center w-1/3 bg-gray-900 rounded-l-2xl p-4 gap-2">
-        <h2 className="font-bold text-white mb-2">A fazer</h2>
+    <div className="flex w-full flex-col lg:flex-row gap-4">
+      <div className="flex flex-col items-stretch w-full lg:w-1/3 bg-gray-900/90 rounded-2xl border border-green-900/40 p-4 gap-3 min-h-[240px]">
+        <h2 className="font-bold text-white mb-2 text-center">A fazer</h2>
 
         {todo.map((task) => (
           <Card
@@ -53,8 +53,8 @@ export default function ListCards({ data }: { data: TodoList }) {
         ))}
       </div>
 
-      <div className="flex flex-col items-center w-1/3 bg-gray-900 p-4 gap-2">
-        <h2 className="font-bold text-white mb-2">Em andamento</h2>
+      <div className="flex flex-col items-stretch w-full lg:w-1/3 bg-gray-900/90 rounded-2xl border border-green-900/40 p-4 gap-3 min-h-[240px]">
+        <h2 className="font-bold text-white mb-2 text-center">Em andamento</h2>
 
         {doing.map((task) => (
           <Card
@@ -68,8 +68,8 @@ export default function ListCards({ data }: { data: TodoList }) {
         ))}
       </div>
 
-      <div className="flex flex-col items-center w-1/3 bg-gray-900 rounded-r-2xl p-4 gap-2">
-        <h2 className="font-bold text-white mb-2">Concluído</h2>
+      <div className="flex flex-col items-stretch w-full lg:w-1/3 bg-gray-900/90 rounded-2xl border border-green-900/40 p-4 gap-3 min-h-[240px]">
+        <h2 className="font-bold text-white mb-2 text-center">Concluído</h2>
 
         {done.map((task) => (
           <Card

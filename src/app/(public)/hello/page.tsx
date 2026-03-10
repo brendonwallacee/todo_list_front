@@ -30,9 +30,11 @@ export default async function Hello() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="w-full max-w-3xl bg-gray-900 text-white rounded-lg p-4 overflow-x-auto">
-        <pre className="whitespace-pre-wrap">{renderJson(data)}</pre>
+    <main className="flex min-h-screen flex-col items-center justify-center px-6 py-12 gap-6">
+      <div className="w-full max-w-3xl bg-gray-900/90 text-white rounded-2xl border border-green-900/40 p-6 sm:p-8 overflow-x-auto shadow-2xl">
+        <pre className="whitespace-pre-wrap text-sm sm:text-base">
+          {renderJson(data)}
+        </pre>
       </div>
       <HomeButton />
     </main>

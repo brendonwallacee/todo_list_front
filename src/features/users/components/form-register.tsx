@@ -30,16 +30,16 @@ export default function FormRegister({
   }
 
   return (
-    <div>
+    <div className="w-full">
       <form
-        className="flex flex-col space-y-4"
+        className="flex flex-col space-y-4 w-full"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex flex-col">
           <label>Usuário:</label>
           <input
             {...register('username')}
-            className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none focus:border-green-500"
+            className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/30 transition"
           />
           {errors.username && (
             <span className="text-red-500 text-sm">
@@ -53,7 +53,7 @@ export default function FormRegister({
           </label>
           <input
             {...register('email')}
-            className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 focus:outline-none focus:border-green-500"
+            className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/30 transition"
           />
           {errors.email && (
             <span className="text-red-500 text-sm">{errors.email.message}</span>
@@ -67,7 +67,7 @@ export default function FormRegister({
           <input
             type="password"
             {...register('password')}
-            className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800"
+            className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/30 transition"
           />
           {errors.password && (
             <span className="text-red-500 text-sm">
@@ -82,7 +82,7 @@ export default function FormRegister({
           <input
             type="password"
             {...register('confirmPassword')}
-            className="px-4 py-2 rounded-lg border border-gray-700 bg-gray-800"
+            className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-2 focus:ring-green-500/30 transition"
           />
           {errors.confirmPassword && (
             <span className="text-red-500 text-sm">
