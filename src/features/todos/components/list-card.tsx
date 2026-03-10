@@ -4,6 +4,7 @@ import { TodoState } from '@features/todos/todo-state';
 import { useEffect, useState } from 'react';
 import Card from './card';
 import { Todo, TodoList } from '../types';
+import { Toaster } from 'react-hot-toast';
 
 export default function ListCards({ data }: { data: TodoList }) {
   const [tasks, setTasks] = useState<Todo[]>([]);
@@ -81,6 +82,7 @@ export default function ListCards({ data }: { data: TodoList }) {
           />
         ))}
       </div>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }

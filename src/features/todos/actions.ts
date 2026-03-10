@@ -1,6 +1,7 @@
 'use server';
 
 import { createTodo } from '@features/todos/services/create-todo';
+import { deleteTodo } from '@features/todos/services/delete-todo';
 import { RegisterTodo, registerTodoSchema } from '@features/todos/schemas';
 import { ApiError } from '@lib/errors/api-error';
 import { ActionResult } from '@lib/types';
@@ -45,6 +46,29 @@ export async function createTodoAction(
     revalidatePath('/dashboard');
 
     return { ok: true };
+  } catch (error) {
+    return {
+      ok: false,
+      message: getActionErrorMessage(error),
+    };
+  }
+}
+
+export async function deleteTodoAction(id: number): Promise<ActionResult> {
+  const token = (await cookies()).get('access_token')?.value;
+
+  if (!token) {
+    return {
+      ok: false,
+      message: 'Não autenticado',
+    };
+  }
+
+  try {
+    const response = await deleteTodo(token, id);
+    revalidatePath('/dashboard');
+
+    return { ok: true, message: response.message };
   } catch (error) {
     return {
       ok: false,

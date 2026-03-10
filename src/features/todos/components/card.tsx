@@ -1,10 +1,13 @@
+'use client';
+
+import { deleteTodoAction } from '@features/todos/actions';
 import { TodoState } from '@features/todos/todo-state';
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
   TrashIcon,
 } from '@heroicons/react/16/solid';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 interface CardProps {
   id: number;
@@ -44,10 +47,20 @@ export default function Card({
 
         <div className="flex gap-2 justify-end">
           <button
-            onClick={() => {
+            onClick={async () => {
               toast.dismiss(t.id);
+              toast.remove(t.id);
+              const res = await deleteTodoAction(id);
+
+              if (!res.ok) {
+                toast.error(res.message ?? 'Não foi possível excluir a tarefa');
+                return;
+              }
+
               onChangeState(id, TodoState.TRASH);
-              toast.success('Tarefa excluída');
+              toast.success(res.message ?? 'Tarefa excluida com sucesso!', {
+                duration: 3000,
+              });
             }}
             className="px-3 py-1 bg-red-600 rounded-md hover:bg-red-500"
           >
@@ -57,6 +70,7 @@ export default function Card({
           <button
             onClick={() => {
               toast.dismiss(t.id);
+              toast.remove(t.id);
             }}
             className="px-3 py-1 bg-gray-700 rounded-md hover:bg-gray-600"
           >
@@ -106,7 +120,6 @@ export default function Card({
       <button onClick={lixo} aria-label="Excluir esta tarefa">
         <TrashIcon className="absolute top-2 right-2 w-4 h-4 hover:text-red-800" />
       </button>
-      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 }
